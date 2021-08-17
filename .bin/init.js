@@ -14,20 +14,32 @@ console.log("--------------------------------------");
 const packageJSON1 = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const packageJSON2 = JSON.parse(fs.readFileSync('./example/package.json', 'utf8'));
 const html = fs.readFileSync('./example/public/index.html', 'utf8');
+const App = fs.readFileSync('./example/src/App.tsx', 'utf8');
+const library = fs.readFileSync('./src/library.tsx','utf8');
 
 // Only run the clean-up if the project is in the initial state
-if (packageJSON1.name !== "react-library_boilerplate")
+if (packageJSON1.name !== "library")
 {
   console.log("The project is alerady set up, nothing to do.");
   process.exit(0);
 }
-// Ask for the new project's name
-const projectName = prompt('\x1b[32mProject name: \x1b[0m');
+// Ask for the new component's name
+const projectName = prompt('\x1b[32mComponent name: \x1b[0m');
 if (!projectName.match(nameRegexp))
 {
-  console.log("\x1b[31m", "ERROR:", "\x1b[0m", "Invalid project name.");
+  console.log("\x1b[31m", "ERROR:", "\x1b[0m", "Invalid component name.");
   process.exit(1);
 }
+// Ask for the new component file name
+const fileName = prompt(`\x1b[32mComponent file name: [${projectName.charAt(0).toUpperCase() + projectName.slice(1)}]\x1b[0m`);
+if (!fileName.match(nameRegexp) && fileName !== "")
+{
+  console.log("\x1b[31m", "ERROR:", "\x1b[0m", "Invalid component file name.");
+  process.exit(1);
+}
+if (fileName === "") fileName = projectName.charAt(0).toUpperCase() + projectName.slice(1)
+
+
 
 // Ask for serve port number
 const portNumber = prompt('\x1b[32mDevelopment server port (1000...65535): \x1b[0m');
@@ -53,7 +65,18 @@ packageJSON2.scripts = { ...packageJSON2.scripts, "serve": `PORT=${portNumber} n
 // Change the linked package's name in the example package.json
 packageJSON2.dependencies = Object.fromEntries(
   Object.entries(packageJSON2.dependencies).filter(([key, value]) => key !== ('library')   ));
-packageJSON2.dependencies[projectName] = "link:.." ;
+packageJSON2.dependencies[projectName] = "link:..";
+
+// Rename the library.tsx file
+fs.renameSync('./src/library.tsx', `./src/${fileName}.tsx`, err => {
+  if (err) {
+    console.log("\x1b[31m", "ERROR:", "\x1b[0m", "The library.tsx file can't be renamed.")
+    process.exit(1)
+  }
+})
+
+// Change the imported module name in App.tsx
+const newApp = App.replace('import Library from "library"', `import Library from "${projectName}"`);
 
 // write out the root package.json
 fs.writeFileSync('./package.json', JSON.stringify(packageJSON1, null, "\t"), err =>
@@ -64,7 +87,7 @@ fs.writeFileSync('./package.json', JSON.stringify(packageJSON1, null, "\t"), err
     process.exit(1);
   }
 })
-// write out the example package.json
+// Write out the example package.json
 fs.writeFileSync('./example/package.json', JSON.stringify(packageJSON2, null, "\t"), err =>
 {
   if (err)
@@ -86,6 +109,16 @@ fs.writeFileSync('./example/public/index.html', newHtml , err =>
   }
 })
 console.log(" Project title has been changed in index.html file.");
+// Update the App.tsx with the new import
+fs.writeFileSync('./example/src/App.tsx', newApp , err =>
+{
+  if (err)
+  {
+    console.log("\x1b[31m", "ERROR:", "\x1b[0m", "The App.tsx file can't be written.");
+    process.exit(1);
+  }
+})
+
 
 console.log("VÉGE...........")
 process.exit(0)
