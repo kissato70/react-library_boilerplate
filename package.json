@@ -1,0 +1,39 @@
+{
+  "name": "switch2",
+  "version": "1.0.0",
+  "description": "library project",
+  "author": "kissato70",
+  "license": "MIT",
+  "repository": "kissato70/library_boilerplate",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.tsx",
+  "engines": {
+    "node": ">=10"
+  },
+  "workspaces": [
+    "example"
+  ],
+  "scripts": {
+    "build": "microbundle-crl --no-compress --format modern,cjs",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "serve": "microbundle-crl watch --no-compress --format modern,cjs && cd example && yarn build",
+    "predeploy": "cd example && yarn install && yarn run build"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.6.1",
+    "@types/react": "^17.0.18",
+    "@types/react-dom": "^17.0.9",
+    "microbundle-crl": "^0.13.11",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
+    "typescript": "^4.3.5"
+  },
+  "files": [
+    "dist"
+  ]
+}
