@@ -15,7 +15,7 @@
     "example"
   ],
   "scripts": {
-    "start": "yarn && node ./.bin/init.js && yarn predeploy && cd ..",
+    "start": "yarn && node ./.bin/init.js && yarn build && yarn predeploy && cd ..",
     "dist": "microbundle-crl --no-compress --format modern,cjs",
     "dev": "microbundle-crl watch --no-compress --format modern,cjs",
     "serve": "cd example && yarn serve",
