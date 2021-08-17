@@ -15,9 +15,10 @@
     "example"
   ],
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
-    "serve": "microbundle-crl watch --no-compress --format modern,cjs && cd example && yarn build",
+    "start": "yarn && node ./.bin/init.js",
+    "dist": "microbundle-crl --no-compress --format modern,cjs",
+    "dev": "microbundle-crl watch --no-compress --format modern,cjs",
+    "serve": "yarn predeploy && yarn serve",
     "predeploy": "cd example && yarn install && yarn run build"
   },
   "peerDependencies": {
