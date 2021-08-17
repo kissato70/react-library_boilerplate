@@ -6,6 +6,7 @@ const prompt = require('./prompt.js')();
 const nameRegexp  = /^[\@]?[a-z0-9\_\-]+[\/]?[a-z0-9\_\-]+[a-z0-9]$/;
 const portRegexp  = "^[1-9][0-9]{3,4}$";
 const titleRegexp = /^[a-zA-Z0-9\ _\-:\/\=\(\)\!\'\"+\?]{3,}$/;
+const fileRegexp  = /^[A-Za-z0-9\_\-]+[A-Za-z0-9]$/;
 
 console.log("--------------------------------------");
 console.log("| React-Library_boilerplate INIT 1.2 |");
@@ -31,13 +32,14 @@ if (!projectName.match(nameRegexp))
   process.exit(1);
 }
 // Ask for the new component file name
-const fileName = prompt(`\x1b[32mComponent file name: [${projectName.charAt(0).toUpperCase() + projectName.slice(1)}]\x1b[0m`);
-if (!fileName.match(nameRegexp) && fileName !== "")
+let fileNameDefault = projectName
+let fileName = prompt(`\x1b[32mComponent file name: [${fileNameDefault}]\x1b[0m`);
+if (!fileName.match(fileRegexp) && fileName !== "")
 {
   console.log("\x1b[31m", "ERROR:", "\x1b[0m", "Invalid component file name.");
   process.exit(1);
 }
-if (fileName === "") fileName = projectName.charAt(0).toUpperCase() + projectName.slice(1)
+if (fileName === "") fileName = fileNameDefault
 
 
 
@@ -58,6 +60,11 @@ if (!htmlTitle.match(titleRegexp))
 }
 // Change the project name in the root package.json
 packageJSON1.name = projectName;
+// Change the library file name in the root package.json
+const libName = fileName
+packageJSON1.main = `dist/${libName}.js`
+packageJSON1.module = `dist/${libName}.modern.js`
+packageJSON1.source = `src/${fileName}.tsx`
 // Change the port number in the example package.json
 packageJSON2.scripts = Object.fromEntries(
   Object.entries(packageJSON2.scripts).filter(([key, value]) => key !== ('serve')   ));
