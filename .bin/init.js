@@ -127,10 +127,6 @@ fs.writeFileSync('./example/src/App.tsx', newApp , err =>
   }
 })
 
-
-console.log("VÉGE...........")
-process.exit(0)
-
 // Delete the Git folder
 fs.rm(".git", { recursive: true, force: true }, () => { } );
 console.log("Original .git is removed from project.");
@@ -153,3 +149,7 @@ console.log(" The bin folder is appended to .gitignore file.");
 
 
 console.log("\x1b[32m", "--- Initialization is finished. ---", "\x1b[0m", "\n");
+console.log("Next steps:", "\n");
+console.log("1)","\x1b[32m", "yarn dev", "\x1b[0m", " - starting the library watch server", "\n");
+console.log("2)","\x1b[32m", "yarn serve", "\x1b[0m", " - starting the example webserver", "\n");
+console.log(" ", "\n");
