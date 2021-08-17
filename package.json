@@ -15,11 +15,11 @@
 		"example"
 	],
 	"scripts": {
-		"start": "node ./.bin/init.js && yarn install && yarn dist && yarn predeploy && cd ..",
+		"start": "yarn install && node ./.bin/init.js && yarn install && yarn dist && yarn _predeploy && cd ..",
 		"dist": "microbundle-crl --no-compress --format modern,cjs",
 		"dev": "microbundle-crl watch --no-compress --format modern,cjs",
 		"serve": "cd example && yarn serve",
-		"predeploy": "cd example && yarn install && yarn run build && cd .."
+		"_predeploy": "cd example && yarn install && yarn run build && cd .."
 	},
 	"peerDependencies": {
 		"react": "^16.0.0"

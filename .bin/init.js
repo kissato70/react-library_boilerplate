@@ -33,6 +33,7 @@ if (!projectName.match(nameRegexp))
 }
 // Ask for the new component file name
 let fileNameDefault = projectName
+if (fileNameDefault.split("/"[1])) fileNameDefault = fileNameDefault.split("/")[1]
 let fileName = prompt(`\x1b[32mComponent file name: [${fileNameDefault}]\x1b[0m`);
 if (!fileName.match(fileRegexp) && fileName !== "")
 {
