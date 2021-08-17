@@ -1,13 +1,13 @@
 {
-  "name": "switch2",
+  "name": "library",
   "version": "1.0.0",
   "description": "library project",
   "author": "kissato70",
   "license": "MIT",
-  "repository": "kissato70/library_boilerplate",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
-  "source": "src/index.tsx",
+  "repository": "kissato70/react-library_boilerplate",
+  "main": "dist/library.js",
+  "module": "dist/library.modern.js",
+  "source": "src/lib.tsx",
   "engines": {
     "node": ">=10"
   },
@@ -15,11 +15,11 @@
     "example"
   ],
   "scripts": {
-    "start": "yarn && node ./.bin/init.js",
+    "start": "yarn && node ./.bin/init.js && yarn predeploy && cd ..",
     "dist": "microbundle-crl --no-compress --format modern,cjs",
     "dev": "microbundle-crl watch --no-compress --format modern,cjs",
-    "serve": "yarn predeploy && yarn serve",
-    "predeploy": "cd example && yarn install && yarn run build"
+    "serve": "cd example && yarn serve",
+    "predeploy": "cd example && yarn install && yarn run build && cd .."
   },
   "peerDependencies": {
     "react": "^16.0.0"
