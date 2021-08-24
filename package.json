@@ -16,7 +16,7 @@
 	],
 	"scripts": {
 		"start": "yarn install && node ./.bin/init.js && yarn install && yarn dist && yarn _predeploy && cd ..",
-		"dist": "microbundle-crl --no-compress --format modern,cjs",
+		"dist": "microbundle-crl --compress --format modern,cjs",
 		"dev": "microbundle-crl watch --no-compress --format modern,cjs",
 		"serve": "cd example && yarn serve",
 		"_predeploy": "cd example && yarn install && yarn run build && cd .."

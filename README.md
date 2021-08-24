@@ -1,29 +1,28 @@
-# switch-multi3
+# React LIBRARY development boilerplate
 
-> Made with create-react-library
+---
 
-[![NPM](https://img.shields.io/npm/v/switch-multi3.svg)](https://www.npmjs.com/package/switch-multi3) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+## __Deployment :__
 
-## Install
+### 1) ```yarn```
 
-```bash
-npm install --save switch-multi3
-```
+### 2) ```yarn start```  
 
-## Usage
+<br>
 
-```tsx
-import React, { Component } from 'react'
+---
 
-import MyComponent from 'switch-multi3'
-import 'switch-multi3/dist/index.css'
+## __Development:__
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
-```
+### 1) ```yarn dev``` - library watch server
+
+### 2) ```yarn serve``` - example webserver
+
+<br>
+
+### 3) ```yarn dist``` - create a compressed library in the `./dist` folder
+
+<br>
 
 ## License
 
