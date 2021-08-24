@@ -8,9 +8,9 @@ const portRegexp  = "^[1-9][0-9]{3,4}$";
 const titleRegexp = /^[a-zA-Z0-9\ _\-:\/\=\(\)\!\'\"+\?]{3,}$/;
 const fileRegexp  = /^[A-Za-z0-9\_\-]+[A-Za-z0-9]$/;
 
-console.log("--------------------------------------");
-console.log("| React-Library_boilerplate INIT 1.2 |");
-console.log("--------------------------------------");
+console.log("----------------------------------------");
+console.log("| React-Library_boilerplate INIT 1.3/L |");
+console.log("----------------------------------------");
 
 const packageJSON1 = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const packageJSON2 = JSON.parse(fs.readFileSync('./example/package.json', 'utf8'));
@@ -75,6 +75,18 @@ packageJSON2.dependencies = Object.fromEntries(
   Object.entries(packageJSON2.dependencies).filter(([key, value]) => key !== ('library')   ));
 packageJSON2.dependencies[projectName] = "link:..";
 
+// Change the library name in the library.tsx
+const newLibrary = library.replace('<p>This is a library Component</p>', `<p>This is a ${projectName} Component</p>`);
+// Write out the changes
+fs.writeFileSync('./src/library.tsx', JSON.stringify(newLibrary, null, "\t"), err =>
+{
+  if (err)
+  {
+    console.log("\x1b[31m", "ERROR:", "\x1b[0m", "The éibrary.tsx file can't be written.");
+    process.exit(1);
+  }
+})
+
 // Rename the library.tsx file
 fs.renameSync('./src/library.tsx', `./src/${fileName}.tsx`, err => {
   if (err) {
@@ -85,6 +97,7 @@ fs.renameSync('./src/library.tsx', `./src/${fileName}.tsx`, err => {
 
 // Change the imported module name in App.tsx
 const newApp = App.replace('import Library from "library"', `import Library from "${projectName}"`);
+newApp = newApp.replace('<h1>This is an Example project for Library development</h1>', `<h1>This is an Example project for ${projectName} development</h1>`);
 
 // write out the root package.json
 fs.writeFileSync('./package.json', JSON.stringify(packageJSON1, null, "\t"), err =>
