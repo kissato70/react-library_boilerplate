@@ -4,7 +4,8 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"build": "node ../node_modules/react-scripts/bin/react-scripts.js build"
+		"build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
+		"serve": "PORT=6543 node ../node_modules/react-scripts/bin/react-scripts.js start"
 	},
 	"dependencies": {
 		"@types/node": "link:../node_modules/@types/node",
