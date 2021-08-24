@@ -78,7 +78,7 @@ packageJSON2.dependencies[projectName] = "link:..";
 // Change the library name in the library.tsx
 const newLibrary = library.replace('<p>This is a library Component</p>', `<p>This is a ${projectName} Component</p>`);
 // Write out the changes
-fs.writeFileSync('./src/library.tsx', JSON.stringify(newLibrary, null, "\t"), err =>
+fs.writeFileSync('./src/library.tsx', newLibrary, err =>
 {
   if (err)
   {
