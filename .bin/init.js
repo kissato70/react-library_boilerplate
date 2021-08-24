@@ -96,7 +96,7 @@ fs.renameSync('./src/library.tsx', `./src/${fileName}.tsx`, err => {
 })
 
 // Change the imported module name in App.tsx
-const newApp = App.replace('import Library from "library"', `import Library from "${projectName}"`);
+let newApp = App.replace('import Library from "library"', `import Library from "${projectName}"`);
 newApp = newApp.replace('<h1>This is an Example project for Library development</h1>', `<h1>This is an Example project for ${projectName} development</h1>`);
 
 // write out the root package.json
