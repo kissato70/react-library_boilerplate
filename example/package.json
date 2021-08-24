@@ -4,16 +4,16 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"build": "node ../node_modules/react-scripts/bin/react-scripts.js build"
+		"serve": "PORT=6543 node ../node_modules/react-scripts/bin/react-scripts.js start"
 	},
 	"dependencies": {
 		"@types/node": "link:../node_modules/@types/node",
 		"@types/react": "link:../node_modules/@types/react",
 		"@types/react-dom": "link:../node_modules/@types/react-dom",
+		"library": "link:..",
 		"react": "link:../node_modules/react",
 		"react-dom": "link:../node_modules/react-dom",
-		"react-scripts": "link:../node_modules/react-scripts",
-    "library": "link:.."
+		"react-scripts": "link:../node_modules/react-scripts"
 	},
 	"devDependencies": {
 		"@babel/plugin-syntax-object-rest-spread": "^7.8.3"
